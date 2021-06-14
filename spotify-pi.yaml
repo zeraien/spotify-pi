@@ -1,0 +1,52 @@
+- remote_user: pi
+  hosts: all
+  become: yes
+  become_user: root
+  vars:
+    - hostname: officepie
+  tasks:
+    - hostname:
+        name: "{{hostname}}"
+    - name: Add raspotify key
+      apt_key:
+        url: https://dtcooper.github.io/raspotify/key.asc
+        state: present
+    - apt_repository:
+        repo: 'deb https://dtcooper.github.io/raspotify raspotify main'
+        state: present
+        update_cache: yes
+    - apt:
+        upgrade: yes
+        autoclean: yes
+    - apt:
+        install_recommends: no
+        pkg:
+          - raspotify
+          - vim
+          - mosh
+          - gmediarenderer
+    - name: copy raspotify config
+      copy:
+        local_follow: no
+        dest: /etc/default/raspotify
+        src: raspotify.config
+        owner: root
+    - name: copy librespot
+      copy:
+        dest: /usr/bin/librespot
+        src: librespot-0.2.0
+        owner: root
+        mode: '755'
+    - name: copy asound.conf
+      copy:
+        dest: /etc/
+        src: asound.conf
+        owner: root
+    - name: Fix Locale
+      locale_gen:
+        name: en_US.UTF-8
+        state: present
+    - name: restart raspotify
+      service:
+        name: raspotify
+        state: restarted
