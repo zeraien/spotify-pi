@@ -24,7 +24,6 @@
           - raspotify
           - vim
           - mosh
-          - gmediarenderer
     - name: copy raspotify config
       copy:
         local_follow: no
