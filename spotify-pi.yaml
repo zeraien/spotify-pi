@@ -33,7 +33,7 @@
     - name: copy librespot
       copy:
         dest: /usr/bin/librespot
-        src: librespot-0.2.0
+        src: librespot-0.3.1
         owner: root
         mode: '755'
     - name: copy asound.conf
