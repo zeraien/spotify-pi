@@ -21,16 +21,16 @@
       apt_repository:
         repo: 'deb https://dtcooper.github.io/raspotify raspotify main'
         state: present
-        update_cache: true
+        update_cache: yes
 
     - name: Do apt-upgrade and autoclean
       apt:
-        upgrade: true
-        autoclean: true
+        upgrade: yes
+        autoclean: yes
 
     - name: Install apt packages
       apt:
-        install_recommends: true
+        install_recommends: yes
         pkg:
           - raspotify
           - vim
@@ -38,7 +38,7 @@
 
     - name: copy raspotify config
       copy:
-        local_follow: true
+        local_follow: yes
         dest: /etc/default/raspotify
         src: raspotify.config
         owner: root
