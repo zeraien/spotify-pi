@@ -30,7 +30,7 @@
 
     - name: Install apt packages
       apt:
-        install_recommends: yes
+        install_recommends: no
         pkg:
           - raspotify
           - vim
