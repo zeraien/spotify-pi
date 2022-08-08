@@ -39,17 +39,10 @@
     - name: copy raspotify config
       copy:
         local_follow: yes
-        dest: /etc/default/raspotify
+        dest: /etc/raspotify/conf
         src: raspotify.config
         owner: root
         mode: '655'
-
-    - name: copy librespot
-      copy:
-        dest: /usr/bin/librespot
-        src: librespot-0.3.1
-        owner: root
-        mode: '755'
 
     - name: copy asound.conf
       copy:
